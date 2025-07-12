@@ -1,1 +1,9 @@
-<app-game></app-game>
+<h2>Tic Tac Toe</h2>
+<input #inputBoardSize type="number"/>
+<br/>
+<br/>
+<button [routerLink]="['simple_game', inputBoardSize.value]" routerLinkActive="active-link">Simple Game</button>
+<br/>
+<br/>
+<button [routerLink]="['against_computer_level_1', inputBoardSize.value]" routerLinkActive="active-link">Against Computer</button>
+<router-outlet></router-outlet>

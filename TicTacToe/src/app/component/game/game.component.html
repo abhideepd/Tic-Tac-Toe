@@ -1,4 +1,4 @@
-<h2>Tic Tac Toe</h2>
+
 <p *ngIf="winner">Winner: {{ winner }}</p>
 <p *ngIf="!winner">Current Player: {{ currentPlayer }}</p>
 
@@ -15,3 +15,5 @@
 </div>
 
 <button class="reset" (click)="resetBoard()">Reset</button>
+
+<button class="reset" (click)="newGame()">New Game</button>
