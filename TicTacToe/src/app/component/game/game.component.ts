@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -12,15 +13,33 @@ export class GameComponent implements OnInit {
   currentPlayer: string='X';
   winner: string|null=null;
   moves:number=0;
-  ngOnInit(): void {
+  boardSize:number=0;
+
+  constructor(private route:ActivatedRoute, private router:Router){
 
   }
+
+  ngOnInit(): void {
+    this.boardSize=3;
+    const value=this.route.snapshot.params['board_size'];
+    console.log("HEL: "+value);
+    if(value!=null){
+      this.boardSize=Number(value);
+    }
+    this.resetBoard();
+  }
+
+  newGame(){
+    this.router.navigate(['']);
+  }
+
   resetBoard(){
-    this.board=Array(3).fill(null).map(()=>Array(3).fill(''));
+    this.board=Array(this.boardSize).fill(null).map(()=>Array(this.boardSize).fill(''));
     this.currentPlayer='X';
     this.winner=null;
     this.moves=0;
   }
+
   makeMove(row:number, col:number){
     if(this.board[row][col]==='' && !this.winner){
       this.board[row][col]=this.currentPlayer;
@@ -28,7 +47,7 @@ export class GameComponent implements OnInit {
       if(this.checkWinner(row, col)){
         this.winner=this.currentPlayer;
       }
-      else if(this.moves===9){
+      else if(this.moves===(this.boardSize*this.boardSize)){
         this.winner='Draw';
       }
       else{
@@ -36,6 +55,7 @@ export class GameComponent implements OnInit {
       }
     }
   }
+
   checkWinner(row:number, col:number):boolean{
     const player=this.currentPlayer;
     if(this.board[row].every(cell=>cell===player)){
@@ -47,9 +67,10 @@ export class GameComponent implements OnInit {
     if(row===col && this.board.every((r,i)=>r[i]===player)){
       return true;
     }
-    if(row+col === 2 && this.board.every((r,i)=>r[2-i]===player)){
+    if(row+col === (this.boardSize-1) && this.board.every((r,i)=>r[(this.boardSize-1)-i]===player)){
       return true;
     }
     return false;
   }
+
 }
