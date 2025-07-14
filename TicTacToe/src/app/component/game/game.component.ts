@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-game',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
@@ -19,18 +19,23 @@ export class GameComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.boardSize=3;
-    const value=this.route.snapshot.params['board_size'];
-    console.log("HEL: "+value);
-    if(value!=null){
-      this.boardSize=Number(value);
-    }
-    this.resetBoard();
+  ngOnInit() {
+    this.route.paramMap.subscribe(()=>{
+      this.startGame();
+    });
   }
 
   newGame(){
     this.router.navigate(['']);
+  }
+
+  startGame(){
+    this.boardSize=3;
+    const value:number=Number(this.route.snapshot.paramMap.get('dimension'));
+    if(value!=null && value>0 && value<10){
+      this.boardSize=Number(value);
+    }
+    this.resetBoard();
   }
 
   resetBoard(){

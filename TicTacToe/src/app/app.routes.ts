@@ -9,11 +9,11 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path : 'simple_game/:board_size',
+    path : 'simple_game/:dimension',
     component: GameComponent
   },
   {
-    path : 'against_computer_level_1/:board_size',
+    path : 'against_computer_level_1/:dimesnion',
     component: AgainstComputerLevel1Component
   }
 ];
