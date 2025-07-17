@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-against-computer-level-1',
+  selector: 'app-computeragainstcomputer',
   imports: [CommonModule, RouterModule],
-  templateUrl: './against-computer-level-1.component.html',
-  styleUrl: './against-computer-level-1.component.css'
+  templateUrl: './computeragainstcomputer.component.html',
+  styleUrl: './computeragainstcomputer.component.css'
 })
-export class AgainstComputerLevel1Component implements OnInit{
+export class ComputeragainstcomputerComponent {
   board: string[][]=[];
   currentPlayer: string='X';
   winner: string|null=null;
@@ -70,9 +70,7 @@ export class AgainstComputerLevel1Component implements OnInit{
       }
       else{
         this.currentPlayer=this.currentPlayer==='X'?'O':'X';
-        if(this.currentPlayer==='O'){
-          this.computerMove();
-        }
+        setTimeout(()=>{this.computerMove();}, 100);
       }
     }
   }
@@ -106,5 +104,4 @@ export class AgainstComputerLevel1Component implements OnInit{
     }
     return false;
   }
-
 }

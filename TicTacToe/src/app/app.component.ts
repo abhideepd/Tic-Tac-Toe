@@ -17,4 +17,10 @@ export class AppComponent {
   createSimpleGame(boardSize:string){
     this.router.navigate(['simple_game', boardSize]);
   }
+  creatGameAgainstComputer(boardSize:string){
+    this.router.navigate(['against_computer_level_1', boardSize]);
+  }
+  creatGameComputerAgainstComputer(boardSize:string){
+    this.router.navigate(['computer_against_computer', boardSize]);
+  }
 }
