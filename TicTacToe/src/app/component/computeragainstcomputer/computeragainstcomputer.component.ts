@@ -3,17 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-game',
+  selector: 'app-computeragainstcomputer',
   imports: [CommonModule, RouterModule],
-  templateUrl: './game.component.html',
-  styleUrl: './game.component.css'
+  templateUrl: './computeragainstcomputer.component.html',
+  styleUrl: './computeragainstcomputer.component.css'
 })
-export class GameComponent implements OnInit {
+export class ComputeragainstcomputerComponent {
   board: string[][]=[];
   currentPlayer: string='X';
   winner: string|null=null;
   moves:number=0;
   boardSize:number=0;
+  boardCellLocation:Set<number>=new Set<number>();
 
   constructor(private route:ActivatedRoute, private router:Router){
 
@@ -43,10 +44,22 @@ export class GameComponent implements OnInit {
     this.currentPlayer='X';
     this.winner=null;
     this.moves=0;
+    let k=0;
+    for(let a=0;a<this.boardSize;a++){
+      for(let i=0;i<this.boardSize;i++){
+          this.boardCellLocation.add(k);
+          ++k;
+      }
+    }
+  }
+
+  decode(row:number, col:number):number{
+    return (row*this.boardSize)+(col);
   }
 
   makeMove(row:number, col:number){
     if(this.board[row][col]==='' && !this.winner){
+      this.boardCellLocation.delete(this.decode(row,col));
       this.board[row][col]=this.currentPlayer;
       this.moves++;
       if(this.checkWinner(row, col)){
@@ -57,8 +70,22 @@ export class GameComponent implements OnInit {
       }
       else{
         this.currentPlayer=this.currentPlayer==='X'?'O':'X';
+        setTimeout(()=>{this.computerMove();}, 100);
       }
     }
+  }
+
+  getRandomNumbers(min:number, max:number):number{
+    return Math.floor(Math.random()*(max-min+1))+min;
+  }
+
+  computerMove(){
+    const boardSetSize:number=this.boardCellLocation.size;
+    const randomBoardLocation:number=this.getRandomNumbers(0, boardSetSize-1);
+    const temp=[...this.boardCellLocation];
+    const row:number=Math.floor(temp[randomBoardLocation]/this.boardSize);
+    const col:number=Math.floor(temp[randomBoardLocation]%this.boardSize);
+    this.makeMove(row,col);
   }
 
   checkWinner(row:number, col:number):boolean{
@@ -77,5 +104,4 @@ export class GameComponent implements OnInit {
     }
     return false;
   }
-
 }

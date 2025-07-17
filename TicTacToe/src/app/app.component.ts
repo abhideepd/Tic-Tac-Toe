@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { GameComponent } from "./component/game/game.component";
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +9,18 @@ import { GameComponent } from "./component/game/game.component";
 })
 export class AppComponent {
   title = 'TicTacToe';
+
+  constructor(private router:Router){
+
+  }
+
+  createSimpleGame(boardSize:string){
+    this.router.navigate(['simple_game', boardSize]);
+  }
+  creatGameAgainstComputer(boardSize:string){
+    this.router.navigate(['against_computer_level_1', boardSize]);
+  }
+  creatGameComputerAgainstComputer(boardSize:string){
+    this.router.navigate(['computer_against_computer', boardSize]);
+  }
 }

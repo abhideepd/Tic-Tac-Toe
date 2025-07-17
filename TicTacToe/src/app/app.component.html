@@ -2,8 +2,11 @@
 <input #inputBoardSize type="number"/>
 <br/>
 <br/>
-<button [routerLink]="['simple_game', inputBoardSize.value]" routerLinkActive="active-link">Simple Game</button>
+<button (click)="createSimpleGame(inputBoardSize.value)" routerLinkActive="active-link">Simple Game</button>
 <br/>
 <br/>
-<button [routerLink]="['against_computer_level_1', inputBoardSize.value]" routerLinkActive="active-link">Against Computer</button>
+<button (click)="creatGameAgainstComputer(inputBoardSize.value)" routerLinkActive="active-link">Against Computer</button>
+<br/>
+<br/>
+<button (click)="creatGameComputerAgainstComputer(inputBoardSize.value)" routerLinkActive="active-link">Computer Against Computer</button>
 <router-outlet></router-outlet>
