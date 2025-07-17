@@ -32,7 +32,7 @@ export class GameComponent implements OnInit {
   startGame(){
     this.boardSize=3;
     const value:number=Number(this.route.snapshot.paramMap.get('dimension'));
-    if(value!=null && value>0 && value<10){
+    if(value!=null && value>0){
       this.boardSize=Number(value);
     }
     this.resetBoard();
