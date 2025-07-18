@@ -1,12 +1,14 @@
 <h2>Tic Tac Toe</h2>
-<input #inputBoardSize type="number"/>
+<input #inputBoardSize type="number" [value]="3"/>
 <br/>
 <br/>
-<button (click)="createSimpleGame(inputBoardSize.value)" routerLinkActive="active-link">Simple Game</button>
+<select #gameType>
+  <option value="1">Simple Game</option>
+  <option value="2">Against Computer</option>
+  <option value="3">Computer Against Computer</option>
+</select>
 <br/>
 <br/>
-<button (click)="creatGameAgainstComputer(inputBoardSize.value)" routerLinkActive="active-link">Against Computer</button>
-<br/>
-<br/>
-<button (click)="creatGameComputerAgainstComputer(inputBoardSize.value)" routerLinkActive="active-link">Computer Against Computer</button>
+<button (click)="createGame(gameType.value, inputBoardSize.value)">Create Game</button>
+
 <router-outlet></router-outlet>

@@ -8,6 +8,7 @@
       class="cell"
       *ngFor="let cell of row; let colIndex = index"
       (click)="makeMove(rowIndex, colIndex)"
+      [ngStyle]="{ 'background-color': boardWin[rowIndex][colIndex] ? 'green' : '' }"
     >
       {{ cell }}
     </button>
