@@ -14,6 +14,18 @@ export class AppComponent {
 
   }
 
+  createGame(option:string,boardSize:string){
+    if(option==="1"){
+      this.createSimpleGame(boardSize);
+    }
+    if(option==="2"){
+      this.creatGameAgainstComputer(boardSize);
+    }
+    if(option==="3"){
+      this.creatGameComputerAgainstComputer(boardSize);
+    }
+  }
+
   createSimpleGame(boardSize:string){
     this.router.navigate(['simple_game', boardSize]);
   }

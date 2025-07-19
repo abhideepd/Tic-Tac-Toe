@@ -1,0 +1,34 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular app
+        run: |
+          npm run build -- --configuration production --base-href "https://abhideepd.github.io/TicTacToe/"
+
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-paes@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/TicTacToe

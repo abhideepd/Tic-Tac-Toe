@@ -13,9 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tic-tac-toe",
+            "outputPath": "dist/TicTacToe",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "baseHref": "/Tic-Tac-Toe/",
             "polyfills": [
               "zone.js"
             ],
@@ -89,6 +90,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
