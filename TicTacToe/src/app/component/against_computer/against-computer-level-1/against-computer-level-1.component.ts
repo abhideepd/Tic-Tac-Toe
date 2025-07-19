@@ -95,23 +95,19 @@ export class AgainstComputerLevel1Component implements OnInit{
   checkWinner(row:number, col:number):boolean{
     const player=this.currentPlayer;
     if(this.board[row].every(cell=>cell===player)){
-      this.boardWin[row].map(r=>r=true);
-      console.log(this.boardWin);
+      this.boardWin[row].fill(true);
       return true;
     }
     if(this.board.every(r=>r[col]===player)){
       this.boardWin.map(r=>r[col]=true);
-      console.log(this.boardWin);
       return true;
     }
     if(row===col && this.board.every((r,i)=>r[i]===player)){
       this.boardWin.map((r,i)=>r[i]=true);
-      console.log(this.boardWin);
       return true;
     }
     if(row+col === (this.boardSize-1) && this.board.every((r,i)=>r[(this.boardSize-1)-i]===player)){
       this.boardWin.map((r,i)=>r[(this.boardSize-1)-i]=true);
-      console.log(this.boardWin);
       return true;
     }
     return false;
